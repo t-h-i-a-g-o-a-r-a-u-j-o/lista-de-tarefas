@@ -1,25 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  box-sizing: border-box;
+}
 
 body {
-  background: #f4f7f6;
-  font-family: 'Poppins', sans-serif;
-  color: #333;
   margin: 0;
+  min-height: 100vh;
   padding: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  background: #f4f7f6;
+  color: #333;
+
+  font-family: 'Poppins', sans-serif;
+}
+
+button,
+input {
+  font: inherit;
 }
 
 .container {
-  max-width: 500px;
-  margin: 40px auto;
-  background: white;
+  width: 100%;
+  max-width: 620px;
+  margin-top: 40px;
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
-h1 {
+.cabecalho {
   text-align: center;
+  margin-bottom: 25px;
+}
+
+.cabecalho h1 {
+  margin: 0 0 8px;
   color: #2c3e50;
+}
+
+.cabecalho p {
+  margin: 0;
+  color: #777;
+  font-size: 0.95rem;
 }
 
 .input-area {
@@ -28,72 +57,237 @@ h1 {
   margin-bottom: 20px;
 }
 
-input#tarefa-input {
-  flex-grow: 1; /* Faz o input ocupar o espaço disponível */
-  padding: 12px;
+#tarefa-input {
+  flex: 1;
+  min-width: 0;
+
+  padding: 12px 14px;
+
   border: 2px solid #ddd;
-  border-radius: 5px;
-  font-size: 1em;
-  transition: border-color 0.3s;
+  border-radius: 8px;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
-input#tarefa-input:focus {
+#tarefa-input:focus {
   outline: none;
   border-color: #7d5fff;
+  box-shadow: 0 0 0 3px rgba(125, 95, 255, 0.12);
 }
 
 button {
-  padding: 12px 20px;
-  background-color: #7d5fff;
-  color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.3s;
+
+  transition:
+    background-color 0.2s,
+    opacity 0.2s,
+    transform 0.1s;
 }
 
-button:hover {
-  background-color: #5a3fdb;
+button:active {
+  transform: scale(0.97);
+}
+
+#btn-adicionar {
+  padding: 12px 20px;
+
+  background: #7d5fff;
+  color: #fff;
+
+  font-weight: 600;
+}
+
+#btn-adicionar:hover {
+  background: #6847ef;
+}
+
+.controles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 10px;
+  flex-wrap: wrap;
+
+  margin-bottom: 12px;
+}
+
+.filtros {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filtro {
+  padding: 8px 12px;
+
+  background: #f1f1f1;
+  color: #555;
+
+  font-size: 0.85rem;
+}
+
+.filtro:hover {
+  background: #e6e6e6;
+}
+
+.filtro.ativo {
+  background: #7d5fff;
+  color: #fff;
+}
+
+.btn-secundario {
+  padding: 8px 12px;
+
+  background: transparent;
+  color: #d9534f;
+
+  border: 1px solid #d9534f;
+
+  font-size: 0.85rem;
+}
+
+.btn-secundario:hover {
+  background: #d9534f;
+  color: #fff;
+}
+
+.contador {
+  margin: 8px 0 16px;
+
+  color: #777;
+  font-size: 0.85rem;
+}
+
+.mensagem-vazia {
+  display: none;
+
+  padding: 25px 10px;
+
+  text-align: center;
+  color: #999;
 }
 
 ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f9f9f9;
-  padding: 15px;
-  border-radius: 5px;
+
+  gap: 12px;
+
+  padding: 14px 15px;
   margin-bottom: 10px;
+
+  background: #f9f9f9;
+
   border-left: 5px solid #7d5fff;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  border-radius: 8px;
+
+  transition:
+    background-color 0.2s,
+    opacity 0.2s;
 }
 
-/* Estilo da tarefa quando marcada como completa */
+li:hover {
+  background: #f5f3ff;
+}
+
 li.completed {
-  text-decoration: line-through;
-  color: #aaa;
   border-left-color: #aaa;
-  background: #f0f0f0;
+  background: #f1f1f1;
+}
+
+.texto-tarefa {
+  flex: 1;
+  min-width: 0;
+
+  cursor: pointer;
+
+  overflow-wrap: anywhere;
+}
+
+li.completed .texto-tarefa {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.acoes-tarefa {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 10px;
+
+  color: #fff;
+
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.edit-btn {
+  background: #3498db;
+}
+
+.edit-btn:hover {
+  background: #2383bd;
 }
 
 .delete-btn {
   background: #e74c3c;
-  border: none;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 0.3s;
 }
 
-li:hover .delete-btn {
-  opacity: 1;
+.delete-btn:hover {
+  background: #c0392b;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 12px;
+  }
+
+  .container {
+    margin-top: 20px;
+    padding: 20px;
+  }
+
+  .input-area {
+    flex-direction: column;
+  }
+
+  #btn-adicionar {
+    width: 100%;
+  }
+
+  .controles {
+    align-items: stretch;
+  }
+
+  .filtros {
+    width: 100%;
+  }
+
+  .filtro {
+    flex: 1;
+  }
+
+  .btn-secundario {
+    width: 100%;
+  }
+
+  li {
+    align-items: flex-start;
+  }
 }
